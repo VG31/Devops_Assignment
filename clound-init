@@ -1,0 +1,11 @@
+package_update: true
+packages:
+  - docker
+runcmd:
+  - service docker start
+  - usermod -aG docker ec2-user
+  - cd /home/ec2-user
+  - git clone https://github.com/yourname/password-generator.git
+  - cd password-generator
+  - docker build -t password-generator .
+  - docker run -d -p 80:80 password-generator
